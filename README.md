@@ -34,8 +34,18 @@ With `ANTHROPIC_API_KEY` set (or an `ant auth login` profile):
 
 ```bash
 npm run author -- --lesson 20 --name Maya --interests "her dog Rex,mud" --allow Rex
-npm run eval:author -- --limit 3
+npm run eval:author
+npm run eval:author -- --limit 3 --model claude-sonnet-5 --effort medium --safety
 ```
+
+Without credentials, the same paths run against a mock generator that composes stories from the allowed vocabulary and deliberately slips on first drafts. It proves the harness and the fallback path; its numbers say nothing about Claude and are labelled MOCK:
+
+```bash
+npm run author -- --lesson 20 --name Maya --mock
+npm run eval:author -- --generator mock --seed 3
+```
+
+Reports land in `eval-results/` (gitignored).
 
 ## Conventions
 

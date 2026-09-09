@@ -15,9 +15,13 @@ import {
   DEFAULT_AUTHOR_MODEL,
   estimateCostUsd,
   fallbackStory,
+  hasAnthropicCredentials,
   loadStoryBank,
+  mockStoryGenerator,
+  NO_CREDENTIALS_MESSAGE,
   storyText,
   type Effort,
+  type StoryGenerator,
 } from "../author/index.js";
 
 const args = process.argv.slice(2);
@@ -29,6 +33,7 @@ let model = DEFAULT_AUTHOR_MODEL;
 let effort: Effort = "high";
 let rounds = 3;
 let safety = false;
+let mock = false;
 for (let i = 0; i < args.length; i++) {
   const a = args[i]!;
   if (a === "--lesson") lesson = Number(args[++i]);
@@ -39,16 +44,28 @@ for (let i = 0; i < args.length; i++) {
   else if (a === "--effort") effort = args[++i] as Effort;
   else if (a === "--rounds") rounds = Number(args[++i]);
   else if (a === "--safety") safety = true;
+  else if (a === "--mock") mock = true;
 }
 
-const client = new Anthropic();
+let generator: StoryGenerator;
+let safetyGate: ReturnType<typeof claudeSafetyGate> | undefined;
+if (mock) {
+  generator = mockStoryGenerator();
+  model = "mock";
+} else {
+  if (!hasAnthropicCredentials()) {
+    console.error(NO_CREDENTIALS_MESSAGE.replace("--generator mock", "--mock"));
+    process.exit(2);
+  }
+  const client = new Anthropic();
+  generator = claudeStoryGenerator(client, { model, effort });
+  if (safety) safetyGate = claudeSafetyGate(client);
+}
+
 const graph = loadUfli();
 const lexicon = Lexicon.load();
 const constraints = buildConstraints(graph, { lesson }, { ...(name ? { name } : {}), interests, allowList: allow });
-const author = new Author(claudeStoryGenerator(client, { model, effort }), lexicon, {
-  maxRounds: rounds,
-  ...(safety ? { safetyGate: claudeSafetyGate(client) } : {}),
-});
+const author = new Author(generator, lexicon, { maxRounds: rounds, ...(safetyGate ? { safetyGate } : {}) });
 
 console.log(`Lesson ${lesson} · focus <${constraints.focus?.grapheme ?? "-"}> · ${constraints.wordBank.length} bank words · ${constraints.heartWords.length} heart words · model ${model} (${effort})\n`);
 const started = Date.now();
@@ -71,5 +88,6 @@ if (result.ok && result.story) {
 }
 
 const u = result.usage;
-console.log(`${secs}s · ${result.rounds} round(s) · in ${u.inputTokens} + cached ${u.cacheReadTokens} (+${u.cacheWriteTokens} written) · out ${u.outputTokens} · ≈ $${estimateCostUsd(u, model).toFixed(4)}`);
+const priced = mock ? DEFAULT_AUTHOR_MODEL : model;
+console.log(`${secs}s · ${result.rounds} round(s) · in ${u.inputTokens} + cached ${u.cacheReadTokens} (+${u.cacheWriteTokens} written) · out ${u.outputTokens} · ≈ $${estimateCostUsd(u, priced).toFixed(4)}${mock ? " (MOCK — simulated usage priced as Opus 5)" : ""}`);
 process.exit(result.ok ? 0 : 1);

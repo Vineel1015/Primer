@@ -7,3 +7,5 @@ export * from "./author.js";
 export * from "./claude.js";
 export * from "./cost.js";
 export * from "./storyBank.js";
+export * from "./mock.js";
+export * from "./credentials.js";
