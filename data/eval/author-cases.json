@@ -1,0 +1,12 @@
+{
+  "cases": [
+    { "id": "l06-sam", "lesson": 6, "profile": { "name": "Sam", "interests": ["cats"] } },
+    { "id": "l10-maya-dog", "lesson": 10, "profile": { "name": "Maya", "interests": ["her dog"], "allowList": ["Maya"] } },
+    { "id": "l16-leo-trucks", "lesson": 16, "profile": { "name": "Leo", "interests": ["trucks", "digging"] } },
+    { "id": "l22-ada-jam", "lesson": 22, "profile": { "name": "Ada", "interests": ["jam", "hats"] } },
+    { "id": "l26-noah-fox", "lesson": 26, "profile": { "name": "Noah", "interests": ["foxes", "running"] } },
+    { "id": "l31-ivy-duck", "lesson": 31, "profile": { "name": "Ivy", "interests": ["ducks", "mud"] } },
+    { "id": "l37-eli-fish", "lesson": 37, "profile": { "name": "Eli", "interests": ["fish", "singing"] } },
+    { "id": "l43-zoe-bike", "lesson": 43, "profile": { "name": "Zoe", "interests": ["her bike", "cake"] } }
+  ]
+}

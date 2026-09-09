@@ -4,17 +4,22 @@
   "private": true,
   "description": "Primer — adaptive reading tutor for ages 4–7. Phase 0: curriculum spine and decodability verifier.",
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "verify": "tsx src/cli/verify.ts",
     "graph:check": "tsx src/cli/graph-check.ts",
+    "author": "tsx src/cli/author.ts",
+    "eval:author": "tsx src/eval/author-eval.ts",
     "lexicon:cmudict": "tsx scripts/fetch-cmudict.ts"
   },
   "dependencies": {
-    "zod": "^3.23.8"
+    "@anthropic-ai/sdk": "^0.124.0",
+    "zod": "^4.6.0"
   },
   "devDependencies": {
     "@types/node": "^22.7.0",

@@ -5,3 +5,5 @@ coverage/
 .DS_Store
 # Downloaded pronunciation dictionary (see scripts/fetch-cmudict.ts)
 data/lexicon/cmudict.dict
+# Author eval reports
+eval-results/

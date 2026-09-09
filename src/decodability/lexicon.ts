@@ -25,6 +25,11 @@ export class Lexicon {
     return this.entries.has(normalize(word));
   }
 
+  /** All headwords, in insertion order. */
+  words(): IterableIterator<string> {
+    return this.entries.keys();
+  }
+
   get(word: string): Pronunciation[] | undefined {
     return this.entries.get(normalize(word));
   }

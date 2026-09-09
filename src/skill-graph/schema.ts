@@ -105,7 +105,7 @@ export const SkillGraph = z.object({
   source: z.string(),
   status: z.enum(["draft", "reviewed"]),
   notes: z.string().optional(),
-  mastery: MasteryCriterion.default({}),
+  mastery: MasteryCriterion.default({ pKnown: 0.95, sessions: 2, maxResponseMs: 2000 }),
   nodes: z.array(SkillNode).min(1),
 });
 

@@ -1,0 +1,52 @@
+{
+  "stories": [
+    {
+      "id": "bank:l06-sam-and-pat",
+      "lesson": 6,
+      "title": "Sam, Pat, a Mat",
+      "allowList": ["Sam", "Pat"],
+      "focusWords": ["fat", "fit"],
+      "sentences": [
+        "Sam sat.",
+        "Pat sat.",
+        "Sam sat at a mat.",
+        "Pat sat at a mat.",
+        "Sam taps.",
+        "Pat taps.",
+        "Tap, tap, tap!"
+      ]
+    },
+    {
+      "id": "bank:l14-the-dog-on-the-mat",
+      "lesson": 14,
+      "title": "The Dog on the Mat",
+      "allowList": [],
+      "focusWords": ["dog", "dig", "big", "got"],
+      "sentences": [
+        "The dog sat on the mat.",
+        "The dog is big.",
+        "The dog can dig.",
+        "Dig, dog, dig!",
+        "The dog got mud on the mat.",
+        "Dad is sad.",
+        "Dad got a mop.",
+        "The dog got a nap."
+      ]
+    },
+    {
+      "id": "bank:l31-the-duck-on-the-log",
+      "lesson": 31,
+      "title": "The Duck on the Log",
+      "allowList": [],
+      "focusWords": ["duck", "back", "quack"],
+      "sentences": [
+        "The duck is on the log.",
+        "The duck can not get off.",
+        "Dad can help.",
+        "Dad has a big net.",
+        "The duck is back in the pond.",
+        "Quack, quack!"
+      ]
+    }
+  ]
+}
