@@ -1,0 +1,25 @@
+{
+  "name": "primer",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Primer — adaptive reading tutor for ages 4–7. Phase 0: curriculum spine and decodability verifier.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "verify": "tsx src/cli/verify.ts",
+    "graph:check": "tsx src/cli/graph-check.ts",
+    "lexicon:cmudict": "tsx scripts/fetch-cmudict.ts"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

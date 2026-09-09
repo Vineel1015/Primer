@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+.env
+.DS_Store
+# Downloaded pronunciation dictionary (see scripts/fetch-cmudict.ts)
+data/lexicon/cmudict.dict
